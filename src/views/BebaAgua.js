@@ -17,12 +17,10 @@ import { set } from 'react-native-reanimated';
   let porcentagem1 = 0;
   let quantidade1 = 2000;
   let consumido1 = 0;
-  let situacao1="";
 export default function BebaAgua({navigation}) {
 
 
   const [porcentagem, setPorcentagem] = useState("0");
-  const [quantidade, setQuantidade] = useState("");
   const [consumido, setConsumido] = useState("0");
   const [situacao, setSituacao] = useState("Ruim");
 
@@ -40,7 +38,7 @@ export default function BebaAgua({navigation}) {
       setSituacao("Ótimo!");
     }
 
-    porcentagem1 = (consumido1/2000)*100;
+    porcentagem1 = Math.floor((consumido1/2000)*100);
     setPorcentagem(porcentagem1);
 
   }
@@ -50,8 +48,9 @@ export default function BebaAgua({navigation}) {
       <ImageBackground source={require("NavegationsScreens/src/img/fundoagua.jpg")} style={styles.bgimage}>
       </ImageBackground>
 
-
-  <Text style={styles.porcentagem}>{porcentagem}%</Text>
+      <View style={styles.porcentagem}>
+        <Text style={styles.porcText}>{porcentagem}%</Text>
+      </View>
 
       <View style = {styles.bodyValores}>
         <View>
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     width:130,
     alignItems:"center",
     alignSelf:"center",
-    marginTop:40,
+    marginTop:10,
     justifyContent:"center",
     borderRadius:100
   },
@@ -101,15 +100,17 @@ const styles = StyleSheet.create({
     borderRadius:100,
     backgroundColor:"#00BFFF",
     height:200,
+    marginTop:50,
+    justifyContent:"center",
+    alignSelf:"center",
+  },
+
+  porcText:{
     color:"#FFF",
     fontSize:70,
-    fontWeight:"bold",
-    marginTop:50,
-    paddingStart:25,
-    paddingTop:50,
-    justifyContent:"center",
-    alignItems:"center",
     alignSelf:"center",
+    justifyContent:"center",
+    fontWeight:"bold",
   },
 
   bodyValores:{

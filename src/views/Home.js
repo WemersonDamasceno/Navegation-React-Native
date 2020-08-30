@@ -1,23 +1,29 @@
 import 'react-native-gesture-handler';
 import React, {useState} from 'react';
-import { View, Text,Button, TextInput, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { View, Text,Button, TextInput, StyleSheet, TouchableOpacity, Image, ToastAndroid} from 'react-native';
+
 
 export default function Home({navigation}) {
     //Faz a variavel e uma função para setar o valor nela
-    const [title, setTitle] = useState('');
-    const [mens, setMensg] = useState('');
+    //const [title, setTitle] = useState('');
+    //const [mens, setMensg] = useState('');
 
-    let mensg = {
+    /*let mensg = {
       mensagem: mens,
       //id: Math.random().toString(10).substring(7)
-    }
+    }*/
     async function trocarTela(){
-        navigation.navigate('Details',{text: mensg});
+        navigation.navigate('Details');
+    }
+
+    async function ToastTeste(){
+      ToastAndroid.show("HOME", ToastAndroid.LONG);
     }
 
     return (
+      <>
+
+
       <View style={styles.container}>
 
         <Image style={{width:130, height:150, alignSelf:"center"}} source = {require("NavegationsScreens/src/img/fotomensg.png")}></Image>
@@ -25,17 +31,10 @@ export default function Home({navigation}) {
 
         <Text style={{color:"#000", fontSize:17, marginTop:20, marginStart:5}}>Digite uma mensagem:📚📝</Text>
 
-        <TextInput style={styles.inputTxt}
-            placeholder="Digite a mensagem"
-            placeholderTextColor="#000"
-            onChangeText={(val1) => setMensg(val1)}>
-        </TextInput>
-
-
         <TouchableOpacity
           style={styles.btnEnviar}
           onPress={()=> trocarTela()}>
-          <Text style={{alignItems:"center", marginTop:7,color:"#FFF", fontSize:17}}>Enviar mensagem</Text>
+          <Text style={{alignItems:"center", marginTop:7,color:"#FFF", fontSize:17}}>Detalhes</Text>
         </TouchableOpacity>
 
         <Text style={{alignSelf:"center", fontSize:17, marginTop:15}}>Ou</Text>
@@ -46,9 +45,17 @@ export default function Home({navigation}) {
         </TouchableOpacity>
 
 
+        <TouchableOpacity style={styles.btnEnviar}
+        onPress = {()=> navigation.navigate("Contatos")}>
+          <Text style={{alignItems:"center", marginTop:7,color:"#FFF", fontSize:17}}>Contatos</Text>
+        </TouchableOpacity>
+
+
 
 
       </View>
+
+      </>
     );
 
 }
